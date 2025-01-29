@@ -1,0 +1,3 @@
+🔥 Promoção do dia: {produto} com {desconto} OFF! 🏆
+📝 Detalhes: {detalhes}
+🛒 Aproveite agora: {link}
