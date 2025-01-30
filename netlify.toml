@@ -1,6 +1,0 @@
-[build]
-  command = "hugo"
-  publish = "templates"
-
-[context.production.environment]
-  HUGO_VERSION = "0.119.0" # Use a versão mais recente ou a versão do seu projeto
