@@ -69,6 +69,7 @@
             imageIdleLeft: new Image(),
             imageJumpRight: new Image(),
             imageJumpLeft: new Image(),
+            groundTexture: new Image(),
             frameWidth: 128,
             frameHeight: 128
         };
@@ -80,6 +81,7 @@
         player.imageIdleLeft.src = "IdleLeft.png";
         player.imageJumpRight.src = "JumpRight.png";
         player.imageJumpLeft.src = "JumpLeft.png";
+        player.groundTexture.src = "groundTexture.png";
 
         // Verifique se as imagens carregaram corretamente
         const loadImages = () => {
@@ -186,16 +188,24 @@
             // Aplica o zoom centrado no jogador
             ctx.setTransform(zoomLevel, 0, 0, zoomLevel, canvas.width / 2 - player.x * zoomLevel, canvas.height / 2 - player.y * zoomLevel);
 
-            ctx.fillStyle = "green";
-            platforms.forEach(plat => ctx.fillRect(plat.x, plat.y, plat.width, plat.height));
+            // Desenhe a textura do chão
+            if (player.groundTexture.complete) {
+                platforms.forEach(plat => {
+                    ctx.drawImage( // Desenha a textura do chão
+                        player.groundTexture,
+                        plat.x,
+                        plat.y,
+                        plat.width,
+                        plat.height
+                    );
+                });
+            }
 
             // Escolhe a imagem com base no movimento, na direção e no estado de pulo
             let sprite;
             if (!player.onGround) {
-                // Se o personagem não estiver no chão, usa o sprite de pulo
                 sprite = player.facingDirection === 'right' ? player.imageJumpRight : player.imageJumpLeft;
             } else {
-                // Se o personagem estiver no chão, usa o sprite de movimento ou idle
                 sprite = player.moving ? (player.facingDirection === 'right' ? player.imageRunRight : player.imageRunLeft) : (player.facingDirection === 'right' ? player.imageIdleRight : player.imageIdleLeft);
             }
 
