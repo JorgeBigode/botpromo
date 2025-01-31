@@ -1,6 +1,6 @@
 [build]
   command = "hugo"
-  publish = "botpromo/public"
+  publish = "public"
 
 [context.production]
   environment = { HUGO_VERSION = "0.119.0" }
